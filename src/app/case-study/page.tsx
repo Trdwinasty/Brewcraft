@@ -13,14 +13,16 @@ export default function CaseStudyPage() {
         <article className="animate-fade-in bg-stone-50 min-h-screen pb-24">
             {/* Immersive Case Study Hero */}
             <header className="relative h-[70vh] min-h-[500px] flex items-center bg-coffee-950 text-cream overflow-hidden">
-                <div className="absolute inset-0 opacity-40">
-                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20"></div>
+                <div className="absolute inset-0">
                     <Image
                         src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=1600&q=80"
                         alt="Case Study Background"
                         fill
-                        className="object-cover mix-blend-overlay opacity-30"
+                        className="object-cover opacity-50"
+                        priority
                     />
+                    {/* Solid gradient overlay for text protection */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-transparent"></div>
                 </div>
                 <div className="container mx-auto max-w-5xl px-6 relative z-10 pt-20">
                     <Link href="/" className="inline-flex items-center text-amber-500 hover:text-amber-400 mb-8 font-medium transition-colors">
@@ -162,7 +164,7 @@ export default function CaseStudyPage() {
 
                             <div className="mt-8 pt-6 border-t border-stone-100">
                                 <Button className="w-full bg-coffee-900 hover:bg-coffee-800 text-white" asChild>
-                                    <a href="https://github.com/trdwi" target="_blank" rel="noopener noreferrer">View Source</a>
+                                    <a href="https://github.com/Trdwinasty/Brewcraft" target="_blank" rel="noopener noreferrer">View Source</a>
                                 </Button>
                             </div>
                         </div>
