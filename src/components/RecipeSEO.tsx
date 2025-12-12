@@ -24,13 +24,13 @@ export default function RecipeSEO({ recipe }: RecipeSEOProps) {
         recipeCategory: 'Beverage',
         recipeCuisine: 'Coffee',
         recipeIngredient: recipe.ingredients,
-        recipeInstructions: recipe.steps.map((step, index) => ({
+        recipeInstructions: (recipe.steps || recipe.instructions || []).map((step, index) => ({
             '@type': 'HowToStep',
             position: index + 1,
             text: step,
         })),
-        keywords: recipe.flavorTags.join(', '),
-        url: `${siteUrl}/recipes/${recipe.slug}`,
+        keywords: (recipe.flavorTags || recipe.tags || []).join(', '),
+        url: recipe.url || `${siteUrl}/recipes/${recipe.slug}`,
     };
 
     return (
