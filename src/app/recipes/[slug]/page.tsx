@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import RecipeSEO from '@/components/RecipeSEO';
+import RecipeCard from '@/components/RecipeCard';
 import { getRecipeBySlug, recipes } from '@/data/recipes';
 
 interface RecipePageProps {
@@ -203,6 +204,22 @@ export default async function RecipePage({ params }: RecipePageProps) {
                     </main>
                 </div>
             </article>
+
+            {/* Related Recipes */}
+            <section className="bg-white py-24 px-6 border-t border-stone-200">
+                <div className="container mx-auto max-w-[1400px]">
+                    <h2 className="text-3xl font-serif font-bold text-coffee-900 mb-12 text-center">You Might Also Like</h2>
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                        {recipes
+                            .filter(r => r.category === recipe.category && r.slug !== recipe.slug)
+                            .slice(0, 4)
+                            .map(related => (
+                                <RecipeCard key={related.slug} recipe={related} />
+                            ))
+                        }
+                    </div>
+                </div>
+            </section>
         </>
     );
 }

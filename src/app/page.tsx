@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import HeroSection from '@/components/HeroSection';
 import RecipeCard from '@/components/RecipeCard';
+import ProcessSection from '@/components/ProcessSection';
 import { recipes, getFeaturedRecipe } from '@/data/recipes';
 
 export default function Home() {
@@ -21,18 +22,25 @@ export default function Home() {
   return (
     <div className="bg-stone-50">
       {/* Hero */}
+      {/* Hero */}
       <HeroSection
-        title="Artisan Coffee, Demystified"
-        subtitle="Master the art of brewing with precise, documentation-style guides for the modern connoisseur."
-        backgroundImage="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1600&q=80"
+        layout="split"
+        title="BrewCraft — Simple, Curated Coffee Recipes"
+        subtitle="A collection of beginner-friendly brewing guides with clear ratios, steps, and practical tips. Designed to help anyone brew better coffee at home — one cup at a time."
+        backgroundImage="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&q=80"
       >
-        <div className="flex gap-4 justify-center">
-          <Button asChild size="lg" className="bg-white text-coffee-900 hover:bg-stone-100 rounded-none px-8 py-6 text-lg tracking-wide border-0 shadow-lg">
-            <Link href="/recipes">Explore Recipes</Link>
-          </Button>
-          <Button asChild size="lg" className="bg-amber-600 text-white hover:bg-amber-700 rounded-none px-8 py-6 text-lg tracking-wide border-0 shadow-lg">
-            <Link href="/methods">Learn Methods</Link>
-          </Button>
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Button asChild size="lg" className="bg-brand-primary text-cream hover:bg-brand-primary/90 rounded-lg px-8 py-6 text-lg tracking-wide border-0 shadow-lg">
+              <Link href="/recipes">Explore Recipes</Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="text-brand-primary border-brand-primary hover:bg-brand-primary hover:text-white rounded-lg px-8 py-6 text-lg tracking-wide shadow-sm">
+              <Link href="/about">About & Process</Link>
+            </Button>
+          </div>
+          <p className="text-sm text-coffee-600 italic mt-2">
+            No ads, no clutter — just straightforward brewing instructions with clean visuals and easy-to-follow steps.
+          </p>
         </div>
       </HeroSection>
 
@@ -72,7 +80,7 @@ export default function Home() {
       </section>
 
       {/* Featured Recipe - Split Layout */}
-      <section className="bg-coffee-900 text-stone-100">
+      <section className="bg-brand-primary text-cream">
         <div className="grid md:grid-cols-2 min-h-[600px]">
           <div className="relative min-h-[400px]">
             <Image
@@ -85,13 +93,13 @@ export default function Home() {
           </div>
           <div className="flex flex-col justify-center p-12 md:p-20">
             <span className="text-amber-400 uppercase tracking-widest text-sm font-semibold mb-4">Recipe of the Week</span>
-            <h2 className="text-4xl md:text-6xl font-serif font-bold mb-6 leading-tight">
+            <h2 className="text-4xl md:text-6xl font-serif font-bold mb-6 leading-tight text-white">
               {featuredRecipe.title}
             </h2>
-            <p className="text-xl text-stone-300 mb-8 max-w-md font-light">
+            <p className="text-xl text-cream/90 mb-8 max-w-md font-light">
               {featuredRecipe.description}
             </p>
-            <div className="flex gap-8 mb-10 text-stone-400">
+            <div className="flex gap-8 mb-10 text-stone-300">
               <div>
                 <div className="text-2xl font-serif text-white">{featuredRecipe.brewTime}</div>
                 <div className="text-xs uppercase tracking-wider">Time</div>
@@ -127,6 +135,9 @@ export default function Home() {
           </Button>
         </div>
       </section>
+
+      {/* Process Documentation */}
+      <ProcessSection />
     </div>
   );
 }

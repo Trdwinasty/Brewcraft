@@ -30,9 +30,13 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
 
             <div className="pt-4">
                 {/* Title */}
-                <h3 className="font-serif text-xl font-bold text-coffee-900 group-hover:text-coffee-600 transition-colors mb-1">
+                <h3 className="font-serif text-xl font-bold text-coffee-900 group-hover:text-coffee-600 transition-colors mb-2">
                     {recipe.title}
                 </h3>
+
+                <p className="text-sm text-slate-600 mb-3 line-clamp-2">
+                    {recipe.description}
+                </p>
 
                 {/* Minimal Meta */}
                 <div className="flex items-center gap-3 text-sm text-coffee-600/80 mb-2">

@@ -23,10 +23,10 @@ export default function AboutPage() {
                     className="object-cover grayscale-[30%]"
                     sizes="100vw"
                 />
-                <div className="absolute inset-0 bg-coffee-900/60 mix-blend-multiply" />
+                <div className="absolute inset-0 bg-black/50" />
                 <div className="relative z-10 text-center text-white px-4 max-w-3xl">
                     <span className="uppercase tracking-widest text-amber-200 text-sm font-semibold mb-4 block animate-slide-up">The Mission</span>
-                    <h1 className="text-5xl md:text-7xl font-serif font-bold mb-6 animate-slide-up">About BrewCraft</h1>
+                    <h1 className="text-5xl md:text-7xl font-serif font-bold mb-6 animate-slide-up text-white">About BrewCraft</h1>
                     <p className="text-xl md:text-2xl text-stone-200 font-light max-w-2xl mx-auto leading-relaxed animate-slide-up">
                         Where precise technical documentation meets the soulful art of artisanal coffee.
                     </p>
@@ -103,7 +103,7 @@ export default function AboutPage() {
                     <section className="relative bg-coffee-900 text-white rounded-sm overflow-hidden p-16 text-center">
                         <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
                         <div className="relative z-10">
-                            <h2 className="text-4xl font-serif font-bold mb-6">Open Source & Brewable</h2>
+                            <h2 className="text-4xl font-serif font-bold mb-6 text-white">Open Source & Brewable</h2>
                             <p className="text-xl text-amber-100/80 mb-10 max-w-2xl mx-auto">
                                 This project is a portfolio showcase. Feel free to inspect the code or contact me for collaboration.
                             </p>
@@ -111,7 +111,7 @@ export default function AboutPage() {
                                 <Button asChild size="lg" className="bg-amber-600 hover:bg-amber-700 text-white rounded-none px-10 py-6 text-lg">
                                     <Link href="https://github.com/trdwi">GitHub Profile</Link>
                                 </Button>
-                                <Button asChild size="lg" variant="outline" className="border-white/30 hover:bg-white/10 text-white rounded-none px-10 py-6 text-lg">
+                                <Button asChild size="lg" variant="outline" className="border-white hover:bg-white hover:text-brand-primary text-white rounded-none px-10 py-6 text-lg">
                                     <Link href="mailto:contact@tricha.com">Contact Me</Link>
                                 </Button>
                             </div>

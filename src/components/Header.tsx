@@ -21,6 +21,7 @@ export default function Header() {
         { href: '/recipes', label: 'Recipes' },
         { href: '/methods', label: 'Brewing Methods' },
         { href: '/about', label: 'About' },
+        { href: '/case-study', label: 'Case Study' },
     ];
 
     return (

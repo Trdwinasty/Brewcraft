@@ -7,7 +7,40 @@ interface HeroSectionProps {
     children?: React.ReactNode;
 }
 
-export default function HeroSection({ title, subtitle, backgroundImage, children }: HeroSectionProps) {
+export default function HeroSection({ title, subtitle, backgroundImage, children, layout = 'immersive' }: HeroSectionProps & { layout?: 'immersive' | 'split' }) {
+    if (layout === 'split') {
+        return (
+            <section className="bg-gradient-to-b from-coffee-50 via-cream to-white py-20 lg:py-32">
+                <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+                    <div className="order-2 lg:order-1 text-center lg:text-left">
+                        <h1 className="text-4xl lg:text-6xl font-serif font-bold text-brand-primary mb-6 leading-tight animate-fade-in-up">
+                            {title}
+                        </h1>
+                        {subtitle && (
+                            <p className="text-lg lg:text-xl text-slate-600 mb-8 max-w-lg mx-auto lg:mx-0 font-light leading-relaxed animate-fade-in-up delay-100">
+                                {subtitle}
+                            </p>
+                        )}
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in-up delay-200">
+                            {children}
+                        </div>
+                    </div>
+                    <div className="order-1 lg:order-2 relative h-[400px] lg:h-[500px] rounded-2xl overflow-hidden shadow-2xl animate-reveal delay-100 rotate-1 hover:rotate-0 transition-transform duration-700">
+                        <Image
+                            src={backgroundImage}
+                            alt="Hero visual"
+                            fill
+                            className="object-cover"
+                            sizes="(max-width: 1024px) 100vw, 50vw"
+                            priority
+                        />
+                        <div className="absolute inset-0 ring-1 ring-inset ring-black/10 rounded-2xl" />
+                    </div>
+                </div>
+            </section>
+        );
+    }
+
     return (
         <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
             {/* Background Image with Parallax-like feel (fixed) */}

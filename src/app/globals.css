@@ -10,25 +10,31 @@
   --font-mono: var(--font-geist-mono);
   --font-serif: var(--font-serif);
 
-  /* Premium Coffee Palette */
-  --color-cream: #F9F5F1;
-  --color-stone-50: #FAFAF9;
-  --color-stone-100: #F5F5F4;
-  --color-stone-200: #E7E5E4;
-  --color-stone-800: #292524;
-  --color-stone-900: #1C1917;
+  /* Premium Coffee Palette - Updated per Senior Feedback */
+  --color-cream: #FFF8F2;
+  /* Surface */
+
+  /* Brand Colors */
+  --color-brand-primary: #3B2F2F;
+  /* Coffee 900 equivalent */
+  --color-brand-accent: #C47E3A;
+  /* Coffee 500 equivalent */
 
   --color-coffee-50: #FAF7F5;
   --color-coffee-100: #F3EBE3;
   --color-coffee-200: #E6D5C4;
   --color-coffee-300: #D4B896;
   --color-coffee-400: #C09A6B;
-  --color-coffee-500: #A67C52;
+  --color-coffee-500: #C47E3A;
+  /* Updated Accent */
   --color-coffee-600: #8B5E34;
   --color-coffee-700: #6B4423;
   --color-coffee-800: #4A3525;
-  --color-coffee-900: #2E1C11;
-  /* Darker, richer */
+  --color-coffee-900: #3B2F2F;
+  /* Updated Primary */
+
+  /* Muted Text */
+  --color-slate-600: #475569;
 
   /* Luxury Accents */
   --color-gold-100: #FBF5D4;
