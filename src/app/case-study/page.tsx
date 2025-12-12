@@ -1,4 +1,3 @@
-```
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -15,13 +14,13 @@ export default function CaseStudyPage() {
             {/* Immersive Case Study Hero */}
             <header className="relative h-[70vh] min-h-[500px] flex items-center bg-coffee-950 text-cream overflow-hidden">
                 <div className="absolute inset-0 opacity-40">
-                     <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20"></div>
-                     <Image
+                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20"></div>
+                    <Image
                         src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=1600&q=80"
                         alt="Case Study Background"
                         fill
                         className="object-cover mix-blend-overlay opacity-30"
-                     />
+                    />
                 </div>
                 <div className="container mx-auto max-w-5xl px-6 relative z-10 pt-20">
                     <Link href="/" className="inline-flex items-center text-amber-500 hover:text-amber-400 mb-8 font-medium transition-colors">
@@ -34,7 +33,7 @@ export default function CaseStudyPage() {
                     <p className="text-xl md:text-2xl text-stone-300 font-light max-w-2xl leading-relaxed">
                         How I used a documentation-first approach to build a high-performance, accessible coffee guide using Next.js and Static Generation.
                     </p>
-                    
+
                     <div className="flex flex-wrap gap-4 mt-10">
                         <span className="bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full text-sm text-white">Next.js 14</span>
                         <span className="bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full text-sm text-white">TypeScript</span>
@@ -47,20 +46,20 @@ export default function CaseStudyPage() {
             {/* Main Content Grid */}
             <div className="container mx-auto px-6 -mt-20 relative z-20">
                 <div className="grid md:grid-cols-[1fr_300px] gap-10 max-w-6xl mx-auto">
-                    
+
                     {/* Left Column: Narrative */}
                     <div className="space-y-12">
                         {/* The Challenge */}
                         <section className="bg-white p-8 md:p-12 rounded-xl shadow-xl border border-stone-100">
-                           <h2 className="text-3xl font-serif font-bold text-coffee-900 mb-6 flex items-center gap-3">
+                            <h2 className="text-3xl font-serif font-bold text-coffee-900 mb-6 flex items-center gap-3">
                                 <span className="w-10 h-10 rounded-full bg-red-100 text-red-600 flex items-center justify-center text-lg">⚠️</span>
                                 The Challenge
-                           </h2>
-                           <p className="text-slate-600 text-lg leading-relaxed mb-6">
-                                New coffee hobbyists are often overwhelmed by inconsistency. One recipe says "add water," another says "pour 250ml at 93°C." 
+                            </h2>
+                            <p className="text-slate-600 text-lg leading-relaxed mb-6">
+                                New coffee hobbyists are often overwhelmed by inconsistency. One recipe says "add water," another says "pour 250ml at 93°C."
                                 Existing recipe sites are either:
-                           </p>
-                           <div className="grid sm:grid-cols-2 gap-4">
+                            </p>
+                            <div className="grid sm:grid-cols-2 gap-4">
                                 <div className="bg-red-50 p-4 rounded-lg border border-red-100">
                                     <h3 className="font-bold text-red-800 mb-2">My Recipe App</h3>
                                     <p className="text-sm text-red-700">Too complex. Requires login, database queries, and tracks user data.</p>
@@ -69,7 +68,7 @@ export default function CaseStudyPage() {
                                     <h3 className="font-bold text-red-800 mb-2">Random Blog</h3>
                                     <p className="text-sm text-red-700">Buried under 5,000 words of SEO fluff and ads before the actual recipe.</p>
                                 </div>
-                           </div>
+                            </div>
                         </section>
 
                         {/* The Solution */}
@@ -77,17 +76,17 @@ export default function CaseStudyPage() {
                             <h2 className="text-3xl font-serif font-bold text-coffee-900 mb-6 flex items-center gap-3">
                                 <span className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-lg">💡</span>
                                 The Solution
-                           </h2>
+                            </h2>
                             <p className="text-slate-600 text-lg leading-relaxed mb-8">
                                 I treated coffee brewing as <strong>technical documentation</strong>. By standardizing the data structure, I could generate a consistent, searchable, and performant UI.
                             </p>
-                            
+
                             <div className="space-y-8">
                                 <div>
                                     <h3 className="text-xl font-bold text-coffee-900 mb-3">1. Structured Data Schema</h3>
                                     <div className="bg-slate-900 rounded-lg p-6 overflow-x-auto">
                                         <pre className="text-sm text-emerald-400 font-mono">
-{`type Recipe = {
+                                            {`type Recipe = {
     slug: string;
     title: string;
     difficulty: 'Beginner' | 'Intermediate' | 'Expert';
@@ -123,7 +122,7 @@ export default function CaseStudyPage() {
                         </section>
 
                         {/* Impact Stats */}
-                         <section>
+                        <section>
                             <h2 className="text-2xl font-serif font-bold text-coffee-900 mb-6">Performance & Impact</h2>
                             <div className="grid sm:grid-cols-3 gap-6">
                                 <div className="bg-white p-6 rounded-lg shadow-sm border-t-4 border-amber-500 text-center">
@@ -160,7 +159,7 @@ export default function CaseStudyPage() {
                                     <li className="font-medium text-slate-700">Next.js, React, Tailwind, Vercel</li>
                                 </div>
                             </ul>
-                            
+
                             <div className="mt-8 pt-6 border-t border-stone-100">
                                 <Button className="w-full bg-coffee-900 hover:bg-coffee-800 text-white" asChild>
                                     <a href="https://github.com/trdwi" target="_blank" rel="noopener noreferrer">View Source</a>
@@ -172,10 +171,9 @@ export default function CaseStudyPage() {
 
                 {/* Footer Quote */}
                 <div className="max-w-4xl mx-auto mt-20 text-center">
-                     <p className="text-2xl font-serif italic text-coffee-800 mb-6">"Crafted with the same precision as a perfect pour-over."</p>
+                    <p className="text-2xl font-serif italic text-coffee-800 mb-6">"Crafted with the same precision as a perfect pour-over."</p>
                 </div>
             </div>
         </article>
     );
 }
-```

@@ -47,7 +47,7 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
 
                 {/* Tags - subtle */}
                 <div className="flex flex-wrap gap-2 opacity-60 group-hover:opacity-100 transition-opacity">
-                    {recipe.flavorTags.slice(0, 2).map((tag) => (
+                    {(recipe.flavorTags || recipe.tags || []).slice(0, 2).map((tag) => (
                         <span key={tag} className="text-xs text-coffee-500 uppercase tracking-wide">
                             #{tag}
                         </span>
