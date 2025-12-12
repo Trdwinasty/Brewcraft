@@ -27,7 +27,7 @@ export default function Home() {
         layout="split"
         title="BrewCraft — Simple, Curated Coffee Recipes"
         subtitle="A collection of beginner-friendly brewing guides with clear ratios, steps, and practical tips. Designed to help anyone brew better coffee at home — one cup at a time."
-        backgroundImage="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&q=80"
+        backgroundImage="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=800&q=80"
       >
         <div className="flex flex-col gap-4">
           <div className="flex flex-col sm:flex-row gap-4">
