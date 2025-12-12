@@ -27,9 +27,9 @@ export default function Header() {
     return (
         <header
             className={`
-        fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b
+        fixed top-0 left-0 right-0 z-[999] transition-all duration-300 border-b
         ${scrolled
-                    ? 'bg-white/95 backdrop-blur-md border-stone-200/50 py-3 shadow-md text-coffee-900'
+                    ? 'bg-cream/95 backdrop-blur-md border-coffee-200/50 py-3 shadow-md text-brand-primary'
                     : 'bg-transparent border-transparent py-6 text-white'
                 }
       `}
@@ -84,7 +84,7 @@ export default function Header() {
             {/* Mobile Navigation Overlay */}
             <div
                 className={`
-          fixed inset-0 bg-cream/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-8 transition-all duration-500
+          fixed inset-0 bg-white z-[998] flex flex-col items-center justify-center gap-8 transition-all duration-500
           ${isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'}
         `}
             >

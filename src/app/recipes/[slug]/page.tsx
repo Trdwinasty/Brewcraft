@@ -33,6 +33,9 @@ export async function generateMetadata({ params }: RecipePageProps): Promise<Met
             description: recipe.description,
             images: [{ url: recipe.image }],
         },
+        alternates: {
+            canonical: `/recipes/${recipe.slug}`,
+        },
     };
 }
 

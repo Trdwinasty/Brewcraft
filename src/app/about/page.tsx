@@ -111,7 +111,7 @@ export default function AboutPage() {
                                 <Button asChild size="lg" className="bg-amber-600 hover:bg-amber-700 text-white rounded-none px-10 py-6 text-lg">
                                     <Link href="https://github.com/trdwi">GitHub Profile</Link>
                                 </Button>
-                                <Button asChild size="lg" variant="outline" className="border-white hover:bg-white hover:text-brand-primary text-white rounded-none px-10 py-6 text-lg">
+                                <Button asChild size="lg" variant="outline" className="bg-transparent border-white hover:bg-white hover:text-brand-primary text-white rounded-none px-10 py-6 text-lg">
                                     <Link href="mailto:contact@tricha.com">Contact Me</Link>
                                 </Button>
                             </div>

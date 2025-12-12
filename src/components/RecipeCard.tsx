@@ -9,8 +9,8 @@ interface RecipeCardProps {
 
 export default function RecipeCard({ recipe }: RecipeCardProps) {
     return (
-        <Link href={`/recipes/${recipe.slug}`} className="block group relative">
-            <div className="relative aspect-[3/4] overflow-hidden rounded-sm bg-stone-200">
+        <Link href={`/recipes/${recipe.slug}`} className="block group relative bg-white rounded-sm shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+            <div className="relative aspect-[3/4] overflow-hidden rounded-t-sm bg-stone-200">
                 <Image
                     src={recipe.image}
                     alt={recipe.title}
