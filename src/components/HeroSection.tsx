@@ -20,16 +20,17 @@ export default function HeroSection({ title, subtitle, backgroundImage, children
                     className="object-cover animate-reveal scale-105"
                     sizes="100vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
+                <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px]" />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/90" />
             </div>
 
             {/* Content */}
             <div className="relative z-10 text-center text-white px-6 max-w-5xl mx-auto flex flex-col items-center">
-                <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 tracking-tight drop-shadow-lg opacity-0 animate-fade-in-up delay-100">
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 tracking-tight drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] opacity-0 animate-fade-in-up delay-100">
                     {title}
                 </h1>
                 {subtitle && (
-                    <p className="text-xl md:text-2xl text-stone-100/90 max-w-2xl mx-auto font-light leading-relaxed mb-10 opacity-0 animate-fade-in-up delay-200">
+                    <p className="text-xl md:text-2xl text-stone-100 max-w-2xl mx-auto font-light leading-relaxed mb-10 opacity-0 animate-fade-in-up delay-200 drop-shadow-md">
                         {subtitle}
                     </p>
                 )}
