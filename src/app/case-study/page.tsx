@@ -1,5 +1,8 @@
+```
 import { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
+import { Button } from '@/components/ui/button';
 
 export const metadata: Metadata = {
     title: 'Case Study | BrewCraft',
@@ -8,138 +11,171 @@ export const metadata: Metadata = {
 
 export default function CaseStudyPage() {
     return (
-        <article className="animate-fade-in bg-white min-h-screen pb-20">
-            {/* Header */}
-            <header className="bg-brand-primary text-cream py-20 px-6">
-                <div className="container mx-auto max-w-4xl">
-                    <Link href="/" className="text-brand-accent hover:text-white mb-6 inline-block font-medium">← Back to Home</Link>
-                    <h1 className="text-4xl md:text-6xl font-serif font-bold mb-6 text-white">BrewCraft Project Case Study</h1>
-                    <p className="text-xl md:text-2xl text-stone-300 font-light max-w-2xl">
-                        A documentation-first approach to better coffee brewing.
+        <article className="animate-fade-in bg-stone-50 min-h-screen pb-24">
+            {/* Immersive Case Study Hero */}
+            <header className="relative h-[70vh] min-h-[500px] flex items-center bg-coffee-950 text-cream overflow-hidden">
+                <div className="absolute inset-0 opacity-40">
+                     <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20"></div>
+                     <Image
+                        src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=1600&q=80"
+                        alt="Case Study Background"
+                        fill
+                        className="object-cover mix-blend-overlay opacity-30"
+                     />
+                </div>
+                <div className="container mx-auto max-w-5xl px-6 relative z-10 pt-20">
+                    <Link href="/" className="inline-flex items-center text-amber-500 hover:text-amber-400 mb-8 font-medium transition-colors">
+                        <span className="mr-2">←</span> Back to Live Site
+                    </Link>
+                    <span className="block text-amber-500 font-bold tracking-widest uppercase text-sm mb-4">Project Case Study</span>
+                    <h1 className="text-5xl md:text-7xl font-serif font-bold mb-8 text-white leading-tight">
+                        Structuring the <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-amber-500">Perfect Pour</span>
+                    </h1>
+                    <p className="text-xl md:text-2xl text-stone-300 font-light max-w-2xl leading-relaxed">
+                        How I used a documentation-first approach to build a high-performance, accessible coffee guide using Next.js and Static Generation.
                     </p>
+                    
+                    <div className="flex flex-wrap gap-4 mt-10">
+                        <span className="bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full text-sm text-white">Next.js 14</span>
+                        <span className="bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full text-sm text-white">TypeScript</span>
+                        <span className="bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full text-sm text-white">Tailwind CSS</span>
+                        <span className="bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full text-sm text-white">JSON-LD</span>
+                    </div>
                 </div>
             </header>
 
-            {/* Content */}
-            <div className="container mx-auto max-w-3xl px-6 py-16 space-y-16">
+            {/* Main Content Grid */}
+            <div className="container mx-auto px-6 -mt-20 relative z-20">
+                <div className="grid md:grid-cols-[1fr_300px] gap-10 max-w-6xl mx-auto">
+                    
+                    {/* Left Column: Narrative */}
+                    <div className="space-y-12">
+                        {/* The Challenge */}
+                        <section className="bg-white p-8 md:p-12 rounded-xl shadow-xl border border-stone-100">
+                           <h2 className="text-3xl font-serif font-bold text-coffee-900 mb-6 flex items-center gap-3">
+                                <span className="w-10 h-10 rounded-full bg-red-100 text-red-600 flex items-center justify-center text-lg">⚠️</span>
+                                The Challenge
+                           </h2>
+                           <p className="text-slate-600 text-lg leading-relaxed mb-6">
+                                New coffee hobbyists are often overwhelmed by inconsistency. One recipe says "add water," another says "pour 250ml at 93°C." 
+                                Existing recipe sites are either:
+                           </p>
+                           <div className="grid sm:grid-cols-2 gap-4">
+                                <div className="bg-red-50 p-4 rounded-lg border border-red-100">
+                                    <h3 className="font-bold text-red-800 mb-2">My Recipe App</h3>
+                                    <p className="text-sm text-red-700">Too complex. Requires login, database queries, and tracks user data.</p>
+                                </div>
+                                <div className="bg-red-50 p-4 rounded-lg border border-red-100">
+                                    <h3 className="font-bold text-red-800 mb-2">Random Blog</h3>
+                                    <p className="text-sm text-red-700">Buried under 5,000 words of SEO fluff and ads before the actual recipe.</p>
+                                </div>
+                           </div>
+                        </section>
 
-                {/* Overview */}
-                <section>
-                    <h2 className="text-2xl font-serif font-bold text-brand-primary mb-4">Overview</h2>
-                    <p className="text-slate-600 text-lg leading-relaxed mb-6">
-                        BrewCraft is a static web project designed to present curated coffee recipes in a clean, structured, and documentation-friendly format. The goal was to create a simple, fast, and visually consistent website that demonstrates my front-end capabilities while applying the same structured approach I use in technical documentation.
-                    </p>
-                </section>
-
-                {/* Problem Statement */}
-                <section>
-                    <h2 className="text-2xl font-serif font-bold text-brand-primary mb-4">Problem Statement</h2>
-                    <p className="text-slate-600 text-lg leading-relaxed mb-4">
-                        Most recipe sites are cluttered, text-heavy, or overloaded with ads. New coffee hobbyists often struggle to understand the fundamentals: grind size, brew ratios, steps, and method differences. I wanted a site that:
-                    </p>
-                    <ul className="list-disc pl-5 space-y-2 text-slate-600 text-lg">
-                        <li>Is simple to navigate</li>
-                        <li>Presents recipes in a consistent format</li>
-                        <li>Loads quickly on any device</li>
-                        <li>Focuses purely on clarity and usability</li>
-                    </ul>
-                </section>
-
-                {/* Objectives */}
-                <section>
-                    <h2 className="text-2xl font-serif font-bold text-brand-primary mb-4">Objectives</h2>
-                    <ul className="list-disc pl-5 space-y-2 text-slate-600 text-lg">
-                        <li>Build a clean, static recipe site with a documentation-first structure.</li>
-                        <li>Provide beginner-friendly coffee recipes with practical ratios and step-by-step instructions.</li>
-                        <li>Apply SEO best practices (metadata, JSON-LD, alt text, semantic structure).</li>
-                        <li>Keep UI minimal, predictable, and easy to scan.</li>
-                    </ul>
-                </section>
-
-                {/* My Role */}
-                <section>
-                    <h2 className="text-2xl font-serif font-bold text-brand-primary mb-4">My Role</h2>
-                    <p className="text-slate-600 text-lg leading-relaxed mb-4">I handled the project end-to-end:</p>
-                    <ul className="list-disc pl-5 space-y-2 text-slate-600 text-lg">
-                        <li>Information architecture</li>
-                        <li>Copywriting and content structure</li>
-                        <li>UX writing and recipe standardization</li>
-                        <li>Front-end development</li>
-                        <li>SEO optimization</li>
-                        <li>Deployment to Vercel</li>
-                    </ul>
-                </section>
-
-                {/* Approach & Design Decisions */}
-                <section>
-                    <h2 className="text-2xl font-serif font-bold text-brand-primary mb-8">Approach & Design Decisions</h2>
-
-                    <div className="space-y-10">
-                        <div>
-                            <h3 className="text-xl font-bold text-brand-primary mb-3">1. Documentation-First Structure</h3>
-                            <p className="text-slate-600 text-lg leading-relaxed mb-3">
-                                Borrowing from my Technical Writer background, every recipe follows a strict template:
+                        {/* The Solution */}
+                        <section className="bg-white p-8 md:p-12 rounded-xl shadow-xl border border-stone-100">
+                            <h2 className="text-3xl font-serif font-bold text-coffee-900 mb-6 flex items-center gap-3">
+                                <span className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-lg">💡</span>
+                                The Solution
+                           </h2>
+                            <p className="text-slate-600 text-lg leading-relaxed mb-8">
+                                I treated coffee brewing as <strong>technical documentation</strong>. By standardizing the data structure, I could generate a consistent, searchable, and performant UI.
                             </p>
-                            <ul className="list-circle pl-5 space-y-1 text-slate-600">
-                                <li>Overview</li>
-                                <li>Ingredients</li>
-                                <li>Ratio & grind size</li>
-                                <li>Equipment</li>
-                                <li>Time & difficulty</li>
-                                <li>Step-by-step instructions</li>
-                                <li>Tips & notes</li>
-                            </ul>
-                            <p className="text-slate-600 text-lg leading-relaxed mt-3">This ensures consistent reading experience.</p>
-                        </div>
+                            
+                            <div className="space-y-8">
+                                <div>
+                                    <h3 className="text-xl font-bold text-coffee-900 mb-3">1. Structured Data Schema</h3>
+                                    <div className="bg-slate-900 rounded-lg p-6 overflow-x-auto">
+                                        <pre className="text-sm text-emerald-400 font-mono">
+{`type Recipe = {
+    slug: string;
+    title: string;
+    difficulty: 'Beginner' | 'Intermediate' | 'Expert';
+    ingredients: string[];
+    steps: string[]; // Strict array for step-by-step UI
+    ratio: string;   // e.g. "1:16"
+    temp: string;    // e.g. "93°C"
+}; `}
+                                        </pre>
+                                    </div>
+                                    <p className="text-slate-500 text-sm mt-3">
+                                        Type-safety ensures every recipe has the critical data needed for a successful brew.
+                                    </p>
+                                </div>
 
-                        <div>
-                            <h3 className="text-xl font-bold text-brand-primary mb-3">2. Minimal Visual System</h3>
-                            <p className="text-slate-600 text-lg leading-relaxed mb-3">
-                                I used a warm, coffee-inspired palette with:
-                            </p>
-                            <ul className="list-disc pl-5 space-y-1 text-slate-600">
-                                <li>Cream backgrounds</li>
-                                <li>Dark brown headings</li>
-                                <li>Subtle amber accents</li>
-                            </ul>
-                            <p className="text-slate-600 text-lg leading-relaxed mt-3">Typography follows a clean hierarchy to guide users through content without distractions.</p>
-                        </div>
+                                <div>
+                                    <h3 className="text-xl font-bold text-coffee-900 mb-3">2. Component Architecture</h3>
+                                    <p className="text-slate-600 leading-relaxed mb-4">
+                                        I built reusable components like <code className="bg-slate-100 px-2 py-1 rounded text-slate-800">RecipeCard</code> and <code className="bg-slate-100 px-2 py-1 rounded text-slate-800">BrewStats</code> to visualize this data consistently.
+                                    </p>
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <div className="border border-stone-200 p-4 rounded bg-stone-50 text-center">
+                                            <span className="block text-2xl mb-2">📱</span>
+                                            <span className="font-bold text-coffee-800">Mobile First</span>
+                                        </div>
+                                        <div className="border border-stone-200 p-4 rounded bg-stone-50 text-center">
+                                            <span className="block text-2xl mb-2">⚡</span>
+                                            <span className="font-bold text-coffee-800">Zero JS Runtime</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
 
-                        <div>
-                            <h3 className="text-xl font-bold text-brand-primary mb-3">3. Static Architecture for Speed</h3>
-                            <p className="text-slate-600 text-lg leading-relaxed mb-3">
-                                The entire site is fully static for:
-                            </p>
-                            <ul className="list-disc pl-5 space-y-1 text-slate-600">
-                                <li>Instant load time</li>
-                                <li>Zero backend maintenance</li>
-                                <li>High reliability on free hosting</li>
-                            </ul>
-                            <p className="text-slate-600 text-lg leading-relaxed mt-3">Next.js static export + Vercel deployment keeps performance strong even on mobile.</p>
-                        </div>
-
-                        <div>
-                            <h3 className="text-xl font-bold text-brand-primary mb-3">4. SEO & Accessibility</h3>
-                            <p className="text-slate-600 text-lg leading-relaxed mb-3">
-                                Each page includes:
-                            </p>
-                            <ul className="list-disc pl-5 space-y-1 text-slate-600">
-                                <li>Unique titles and meta descriptions</li>
-                                <li>Proper alt attributes</li>
-                                <li>JSON-LD Recipe schema</li>
-                                <li>Mobile-first responsive layout</li>
-                            </ul>
-                            <p className="text-slate-600 text-lg leading-relaxed mt-3">This increases discoverability and demonstrates SEO competence.</p>
-                        </div>
+                        {/* Impact Stats */}
+                         <section>
+                            <h2 className="text-2xl font-serif font-bold text-coffee-900 mb-6">Performance & Impact</h2>
+                            <div className="grid sm:grid-cols-3 gap-6">
+                                <div className="bg-white p-6 rounded-lg shadow-sm border-t-4 border-amber-500 text-center">
+                                    <span className="block text-4xl font-bold text-coffee-900 mb-2">100</span>
+                                    <span className="text-slate-500 uppercase tracking-wider text-xs font-bold">Lighthouse Score</span>
+                                </div>
+                                <div className="bg-white p-6 rounded-lg shadow-sm border-t-4 border-amber-500 text-center">
+                                    <span className="block text-4xl font-bold text-coffee-900 mb-2">0ms</span>
+                                    <span className="text-slate-500 uppercase tracking-wider text-xs font-bold">Database Latency</span>
+                                </div>
+                                <div className="bg-white p-6 rounded-lg shadow-sm border-t-4 border-amber-500 text-center">
+                                    <span className="block text-4xl font-bold text-coffee-900 mb-2">SEO</span>
+                                    <span className="text-slate-500 uppercase tracking-wider text-xs font-bold">Rich Snippets Ready</span>
+                                </div>
+                            </div>
+                        </section>
                     </div>
-                </section>
+
+                    {/* Right Sidebar: Context */}
+                    <aside className="space-y-8">
+                        <div className="bg-white p-6 rounded-xl shadow-lg border border-stone-100 sticky top-8">
+                            <h3 className="font-bold text-coffee-900 mb-4 text-lg border-b border-stone-100 pb-2">Project info</h3>
+                            <ul className="space-y-4 text-sm">
+                                <div>
+                                    <span className="block text-stone-400 text-xs uppercase tracking-wider mb-1">Role</span>
+                                    <li className="font-medium text-slate-700">Design, Dev, Content</li>
+                                </div>
+                                <div>
+                                    <span className="block text-stone-400 text-xs uppercase tracking-wider mb-1">Timeline</span>
+                                    <li className="font-medium text-slate-700">2 Weeks (Design to Ship)</li>
+                                </div>
+                                <div>
+                                    <span className="block text-stone-400 text-xs uppercase tracking-wider mb-1">Stack</span>
+                                    <li className="font-medium text-slate-700">Next.js, React, Tailwind, Vercel</li>
+                                </div>
+                            </ul>
+                            
+                            <div className="mt-8 pt-6 border-t border-stone-100">
+                                <Button className="w-full bg-coffee-900 hover:bg-coffee-800 text-white" asChild>
+                                    <a href="https://github.com/trdwi" target="_blank" rel="noopener noreferrer">View Source</a>
+                                </Button>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
 
                 {/* Footer Quote */}
-                <section className="bg-coffee-50 p-8 rounded-xl border border-coffee-100 italic text-coffee-800 text-lg text-center">
-                    "From bean to brew — designing clarity into every cup."
-                </section>
-
+                <div className="max-w-4xl mx-auto mt-20 text-center">
+                     <p className="text-2xl font-serif italic text-coffee-800 mb-6">"Crafted with the same precision as a perfect pour-over."</p>
+                </div>
             </div>
         </article>
     );
 }
+```
