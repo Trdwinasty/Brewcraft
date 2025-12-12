@@ -1,65 +1,132 @@
-import Image from "next/image";
+import Link from 'next/link';
+import Image from 'next/image';
+import { Button } from '@/components/ui/button';
+import HeroSection from '@/components/HeroSection';
+import RecipeCard from '@/components/RecipeCard';
+import { recipes, getFeaturedRecipe } from '@/data/recipes';
 
 export default function Home() {
+  const featuredRecipe = getFeaturedRecipe();
+  const latestRecipes = recipes
+    .filter(r => r.slug !== featuredRecipe.slug)
+    .slice(0, 4);
+
+  const categories = [
+    { name: 'Pour Over', image: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800&q=80', slug: 'pour-over' },
+    { name: 'Espresso', image: 'https://images.unsplash.com/photo-1510707577719-ae7c1d72cf93?w=800&q=80', slug: 'espresso' },
+    { name: 'Cold Brew', image: 'https://images.unsplash.com/photo-1517701604599-bb29b5c7faaf?w=800&q=80', slug: 'cold-brew' },
+    { name: 'Milk Based', image: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=800&q=80', slug: 'espresso' }, // Logic filters by tags
+  ];
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="bg-stone-50">
+      {/* Hero */}
+      <HeroSection
+        title="Artisan Coffee, Demystified"
+        subtitle="Master the art of brewing with precise, documentation-style guides for the modern connoisseur."
+        backgroundImage="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1600&q=80"
+      >
+        <div className="flex gap-4 justify-center">
+          <Button asChild size="lg" className="bg-white text-coffee-900 hover:bg-stone-100 rounded-none px-8 py-6 text-lg tracking-wide border-0 shadow-lg">
+            <Link href="/recipes">Explore Recipes</Link>
+          </Button>
+          <Button asChild size="lg" className="bg-amber-600 text-white hover:bg-amber-700 rounded-none px-8 py-6 text-lg tracking-wide border-0 shadow-lg">
+            <Link href="/methods">Learn Methods</Link>
+          </Button>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+      </HeroSection>
+
+      {/* Categories - Visual Tiles */}
+      <section className="py-20 px-6 max-w-[1400px] mx-auto">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-12">
+          <div>
+            <span className="text-coffee-500 uppercase tracking-widest text-sm font-semibold mb-2 block">Curated Collections</span>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-coffee-900">Explore by Category</h2>
+          </div>
+          <Link href="/recipes" className="text-coffee-600 hover:text-coffee-900 underline decoration-1 underline-offset-4 hidden md:block">
+            View all categories
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 h-[500px] md:h-[400px]">
+          {categories.map((cat) => (
+            <Link
+              key={cat.name}
+              href={`/recipes?category=${cat.name}`}
+              className="relative group h-full overflow-hidden block"
+            >
+              <Image
+                src={cat.image}
+                alt={cat.name}
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-110 grayscale-[30%] group-hover:grayscale-0"
+                sizes="(max-width: 768px) 100vw, 25vw"
+              />
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
+                <span className="text-white font-serif text-2xl font-bold tracking-tight">{cat.name}</span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Featured Recipe - Split Layout */}
+      <section className="bg-coffee-900 text-stone-100">
+        <div className="grid md:grid-cols-2 min-h-[600px]">
+          <div className="relative min-h-[400px]">
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+              src={featuredRecipe.image}
+              alt={featuredRecipe.title}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          </div>
+          <div className="flex flex-col justify-center p-12 md:p-20">
+            <span className="text-amber-400 uppercase tracking-widest text-sm font-semibold mb-4">Recipe of the Week</span>
+            <h2 className="text-4xl md:text-6xl font-serif font-bold mb-6 leading-tight">
+              {featuredRecipe.title}
+            </h2>
+            <p className="text-xl text-stone-300 mb-8 max-w-md font-light">
+              {featuredRecipe.description}
+            </p>
+            <div className="flex gap-8 mb-10 text-stone-400">
+              <div>
+                <div className="text-2xl font-serif text-white">{featuredRecipe.brewTime}</div>
+                <div className="text-xs uppercase tracking-wider">Time</div>
+              </div>
+              <div>
+                <div className="text-2xl font-serif text-white">{featuredRecipe.difficulty}</div>
+                <div className="text-xs uppercase tracking-wider">Level</div>
+              </div>
+            </div>
+            <Button asChild size="lg" className="self-start bg-amber-600 hover:bg-amber-700 text-white rounded-none px-8 py-6">
+              <Link href={`/recipes/${featuredRecipe.slug}`}>View Recipe</Link>
+            </Button>
+          </div>
         </div>
-      </main>
+      </section>
+
+      {/* Latest Recipes - Editorial Grid */}
+      <section className="py-24 px-6 max-w-[1400px] mx-auto">
+        <div className="text-center mb-16">
+          <span className="text-coffee-500 uppercase tracking-widest text-sm font-semibold">Fresh From The Bar</span>
+          <h2 className="text-4xl md:text-5xl font-serif font-bold text-coffee-900 mt-3">Latest Brew Guides</h2>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
+          {latestRecipes.map((recipe) => (
+            <RecipeCard key={recipe.slug} recipe={recipe} />
+          ))}
+        </div>
+
+        <div className="text-center mt-16">
+          <Button asChild variant="outline" size="lg" className="border-coffee-900 text-coffee-900 hover:bg-coffee-900 hover:text-white rounded-none px-10">
+            <Link href="/recipes">View Archive</Link>
+          </Button>
+        </div>
+      </section>
     </div>
   );
 }
