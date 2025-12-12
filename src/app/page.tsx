@@ -13,8 +13,8 @@ export default function Home() {
 
   const categories = [
     { name: 'Pour Over', image: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800&q=80', slug: 'pour-over' },
-    { name: 'Espresso', image: 'https://images.unsplash.com/photo-1510707577719-ae7c1d72cf93?w=800&q=80', slug: 'espresso' },
-    { name: 'Cold Brew', image: 'https://images.unsplash.com/photo-1517701604599-bb29b5c7faaf?w=800&q=80', slug: 'cold-brew' },
+    { name: 'Espresso', image: 'https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?w=800&q=80', slug: 'espresso' },
+    { name: 'Cold Brew', image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=800&q=80', slug: 'cold-brew' },
     { name: 'Milk Based', image: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=800&q=80', slug: 'espresso' }, // Logic filters by tags
   ];
 

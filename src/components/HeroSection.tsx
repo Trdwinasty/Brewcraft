@@ -20,7 +20,7 @@ export default function HeroSection({ title, subtitle, backgroundImage, children
                     className="object-cover animate-reveal scale-105"
                     sizes="100vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60" />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
             </div>
 
             {/* Content */}
