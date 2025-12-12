@@ -19,6 +19,7 @@ export type Recipe = {
     totalTime?: string;
     equipment?: string[];
     ratio?: string;
+    temp?: string;
     steps?: string[];
     tips?: string[];
 };

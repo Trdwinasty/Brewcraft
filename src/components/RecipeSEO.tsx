@@ -2,7 +2,7 @@ import Script from 'next/script';
 import type { Recipe } from '@/data/recipes';
 
 interface RecipeSEOProps {
-    recipe: Recipe;
+    recipe: Recipe & { url?: string };
 }
 
 export default function RecipeSEO({ recipe }: RecipeSEOProps) {
