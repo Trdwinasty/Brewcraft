@@ -1,228 +1,166 @@
-import { Metadata } from 'next';
+import recipes, { getRecipeBySlug } from '@/data/recipes';
+import RecipeSEO from '@/components/RecipeSEO';
 import Image from 'next/image';
+import Link from 'next/link';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import { notFound } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
-import Breadcrumbs from '@/components/Breadcrumbs';
-import RecipeSEO from '@/components/RecipeSEO';
-import RecipeCard from '@/components/RecipeCard';
-import { getRecipeBySlug, recipes } from '@/data/recipes';
 
-interface RecipePageProps {
-    params: Promise<{ slug: string }>;
-}
+type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
-    return recipes.map((recipe) => ({
-        slug: recipe.slug,
-    }));
+    return recipes.map(r => ({ slug: r.slug }));
 }
 
-export async function generateMetadata({ params }: RecipePageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: Props) {
     const { slug } = await params;
     const recipe = getRecipeBySlug(slug);
-
-    if (!recipe) {
-        return { title: 'Recipe Not Found' };
-    }
+    if (!recipe) return { title: 'Recipe Not Found' };
 
     return {
-        title: `${recipe.title} Recipe`,
+        title: `${recipe.title} — BrewCraft`,
         description: recipe.description,
         openGraph: {
-            title: `${recipe.title} | BrewCraft`,
+            title: `${recipe.title} — BrewCraft`,
             description: recipe.description,
             images: [{ url: recipe.image }],
         },
-        alternates: {
-            canonical: `/recipes/${recipe.slug}`,
-        },
+        alternates: { canonical: `https://trdwi.vercel.app/recipes/${recipe.slug}` }
     };
 }
 
-export default async function RecipePage({ params }: RecipePageProps) {
+export default async function RecipePage({ params }: Props) {
     const { slug } = await params;
     const recipe = getRecipeBySlug(slug);
+    if (!recipe) notFound();
 
-    if (!recipe) {
-        notFound();
-    }
+    const absoluteImage = recipe.image.startsWith('http') ? recipe.image : `https://trdwi.vercel.app${recipe.image}`;
 
     return (
-        <>
-            <RecipeSEO recipe={recipe} />
+        <div className="bg-stone-50 min-h-screen pb-12">
+            <RecipeSEO recipe={{
+                ...recipe,
+                image: absoluteImage,
+                url: `https://trdwi.vercel.app/recipes/${recipe.slug}`
+            }} />
 
-            <article className="min-h-screen bg-stone-50">
-                {/* Full Screen Header */}
-                <header className="relative h-[80vh] min-h-[600px] w-full overflow-hidden">
-                    <Image
-                        src={recipe.image}
-                        alt={recipe.title}
-                        fill
-                        priority
-                        className="object-cover animate-reveal scale-105"
-                        sizes="100vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/80" />
-
-                    <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-20 text-white max-w-[1400px] mx-auto">
-                        <div className="animate-fade-in-up">
-                            <div className="flex flex-wrap gap-3 mb-6">
-                                <Badge variant="secondary" className="bg-white/20 backdrop-blur text-white border-none text-sm uppercase tracking-wider px-3 py-1">
-                                    {recipe.category}
-                                </Badge>
-                                <Badge variant="secondary" className="bg-amber-500 text-white border-none text-sm uppercase tracking-wider px-3 py-1">
-                                    {recipe.difficulty}
-                                </Badge>
-                            </div>
-                            <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 leading-[1.1]">
-                                {recipe.title}
-                            </h1>
-                            <p className="text-xl md:text-2xl text-stone-200 max-w-2xl font-light leading-relaxed mb-8">
-                                {recipe.description}
-                            </p>
-                            <div className="flex gap-4 md:gap-12 text-stone-300 font-serif border-t border-white/20 pt-8">
-                                <div>
-                                    <div className="text-3xl text-white">{recipe.totalTime}</div>
-                                    <div className="text-xs uppercase tracking-wider text-stone-400">Total Time</div>
-                                </div>
-                                <div>
-                                    <div className="text-3xl text-white">{recipe.yield}</div>
-                                    <div className="text-xs uppercase tracking-wider text-stone-400">Yield</div>
-                                </div>
-                                <div>
-                                    <div className="text-3xl text-white">{recipe.grindSize}</div>
-                                    <div className="text-xs uppercase tracking-wider text-stone-400">Grind</div>
-                                </div>
-                            </div>
+            {/* Header Image */}
+            <header className="relative w-full h-[50vh] min-h-[400px]">
+                <Image src={recipe.image} alt={recipe.title} fill className="object-cover" priority sizes="100vw" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-12 container mx-auto">
+                    <div className="max-w-4xl mx-auto">
+                        <div className="flex gap-2 mb-4">
+                            <Badge className="bg-amber-500 text-white border-none">{recipe.difficulty}</Badge>
+                            <Badge variant="outline" className="text-stone-200 border-stone-400 backdrop-blur-sm">{recipe.category}</Badge>
                         </div>
+                        <h1 className="text-4xl md:text-6xl font-serif font-bold text-white mb-4 shadow-sm">{recipe.title}</h1>
+                        <p className="text-xl text-stone-200 max-w-2xl font-light">{recipe.description}</p>
                     </div>
-                </header>
+                </div>
+            </header>
 
-                {/* Content Layout */}
-                <div className="max-w-[1400px] mx-auto px-6 py-12 md:py-24 grid lg:grid-cols-[400px_1fr] gap-12 lg:gap-24">
-                    {/* Sidebar - Sticky */}
-                    <aside className="lg:sticky lg:top-24 h-fit space-y-12">
-                        <div className="mb-8">
-                            <Breadcrumbs
-                                items={[
-                                    { label: 'Recipes', href: '/recipes' },
-                                    { label: recipe.title },
-                                ]}
-                            />
-                        </div>
+            <main className="container mx-auto px-6 -mt-8 relative z-10">
+                <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden">
+                    <div className="p-6 md:p-8 border-b border-stone-100">
+                        <Breadcrumbs
+                            items={[
+                                { label: 'Recipes', href: '/recipes' },
+                                { label: recipe.title },
+                            ]}
+                        />
+                    </div>
 
-                        {/* Ingredients */}
-                        <div className="bg-white p-8 rounded-sm shadow-sm border border-stone-200/60">
-                            <h3 className="font-serif text-2xl font-bold text-coffee-900 mb-6 flex items-center gap-3">
-                                Ingredients
-                            </h3>
-                            <ul className="space-y-4">
-                                {recipe.ingredients.map((ing, i) => (
-                                    <li key={i} className="flex items-start gap-4 text-coffee-700 pb-4 border-b border-stone-100 last:border-0 last:pb-0">
-                                        <span className="text-amber-500 mt-1.5 text-xs">●</span>
-                                        <span className="text-lg">{ing}</span>
+                    <article className="grid md:grid-cols-[1fr_300px] gap-8 p-6 md:p-12">
+                        <section>
+                            <div className="flex flex-wrap gap-2 mb-8">
+                                {recipe.tags?.map(t => <span key={t} className="text-xs font-bold uppercase tracking-wider bg-stone-100 px-3 py-1 rounded-sm text-stone-600">#{t}</span>)}
+                            </div>
+
+                            <h2 className="text-2xl font-serif font-bold text-coffee-900 mb-6 flex items-center gap-3">
+                                <span className="text-amber-600">🥘</span> Ingredients
+                            </h2>
+                            <ul className="grid sm:grid-cols-2 gap-3 mb-10">
+                                {recipe.ingredients.map((i, idx) => (
+                                    <li key={idx} className="flex items-start gap-2 text-stone-700 bg-stone-50 p-3 rounded-md">
+                                        <span className="text-amber-500 mt-1">•</span>
+                                        {i}
                                     </li>
                                 ))}
                             </ul>
-                        </div>
 
-                        {/* Equipment */}
-                        <div className="bg-white p-8 rounded-sm shadow-sm border border-stone-200/60">
-                            <h3 className="font-serif text-2xl font-bold text-coffee-900 mb-6">Equipment</h3>
-                            <ul className="space-y-3">
-                                {recipe.equipment.map((item, i) => (
-                                    <li key={i} className="flex items-center gap-3 text-coffee-700">
-                                        <span className="w-5 h-5 rounded-full border border-stone-300 flex items-center justify-center text-[10px] text-stone-400">✓</span>
-                                        {item}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        {/* Ratio Stats */}
-                        <div className="bg-coffee-900 text-stone-200 p-8 rounded-sm">
-                            <h3 className="font-serif text-xl font-bold text-white mb-4">Brew Stats</h3>
-                            <div className="space-y-4">
-                                <div className="flex justify-between items-center border-b border-white/10 pb-2">
-                                    <span className="text-sm uppercase tracking-widest text-stone-400">Ratio</span>
-                                    <span className="font-mono text-lg">{recipe.ratio}</span>
-                                </div>
-                                <div className="flex justify-between items-center border-b border-white/10 pb-2">
-                                    <span className="text-sm uppercase tracking-widest text-stone-400">Prep</span>
-                                    <span className="font-mono text-lg">{recipe.prepTime}</span>
-                                </div>
-                                <div className="flex justify-between items-center border-b border-white/10 pb-2">
-                                    <span className="text-sm uppercase tracking-widest text-stone-400">Brew</span>
-                                    <span className="font-mono text-lg">{recipe.brewTime}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </aside>
-
-                    {/* Main Content - Steps */}
-                    <main>
-                        {/* Instructions */}
-                        <div className="space-y-16">
-                            <div>
-                                <h2 className="text-3xl md:text-4xl font-serif font-bold text-coffee-900 mb-8">Preparation</h2>
-                                <div className="prose prose-lg prose-stone text-coffee-700">
-                                    <p className="text-xl leading-relaxed font-light">
-                                        Before we start, ensure your water is heated to the correct temperature and your beans are ground fresh to a {recipe.grindSize.toLowerCase()} consistency.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div className="space-y-12">
-                                {recipe.steps.map((step, index) => (
-                                    <div key={index} className="group relative pl-8 md:pl-12 border-l-2 border-stone-200 hover:border-amber-400 transition-colors duration-300">
-                                        <span className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-stone-100 border-2 border-stone-300 group-hover:border-amber-500 group-hover:bg-amber-500 transition-colors" />
-                                        <span className="text-6xl font-serif font-bold text-stone-100 absolute -top-8 -left-12 -z-10 select-none group-hover:text-amber-50 transition-colors">
-                                            {index + 1}
+                            <h2 className="text-2xl font-serif font-bold text-coffee-900 mb-6 flex items-center gap-3">
+                                <span className="text-amber-600">📝</span> Instructions
+                            </h2>
+                            <div className="space-y-6">
+                                {recipe.instructions.map((s, idx) => (
+                                    <div key={idx} className="flex gap-4 group">
+                                        <span className="flex-shrink-0 w-8 h-8 rounded-full bg-coffee-100 text-coffee-800 font-bold flex items-center justify-center border border-coffee-200 group-hover:bg-amber-500 group-hover:text-white transition-colors">
+                                            {idx + 1}
                                         </span>
-                                        <h3 className="text-2xl font-bold text-coffee-900 mb-4 group-hover:text-amber-700 transition-colors">
-                                            Step {index + 1}
-                                        </h3>
-                                        <p className="text-xl text-coffee-700 leading-relaxed">
-                                            {step}
-                                        </p>
+                                        <p className="text-lg text-stone-700 leading-relaxed pt-0.5">{s}</p>
                                     </div>
                                 ))}
                             </div>
-                        </div>
 
-                        {/* Tips */}
-                        <div className="mt-20 p-8 md:p-12 bg-amber-50 border-l-4 border-amber-500 rounded-r-sm">
-                            <h3 className="text-2xl font-serif font-bold text-coffee-900 mb-6 flex items-center gap-3">
-                                <span className="text-amber-600">💡</span> Pro Tips
-                            </h3>
-                            <ul className="space-y-4">
-                                {recipe.tips.map((tip, i) => (
-                                    <li key={i} className="flex gap-4 text-coffee-800 text-lg">
-                                        <span className="text-amber-400 font-bold">•</span>
-                                        {tip}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </main>
-                </div>
-            </article>
+                            {recipe.tips && recipe.tips.length > 0 && (
+                                <div className="mt-12 p-6 bg-blue-50/50 border border-blue-100 rounded-lg">
+                                    <h3 className="font-bold text-blue-900 mb-3 flex items-center gap-2">💡 Pro Tips</h3>
+                                    <ul className="space-y-2">
+                                        {recipe.tips.map((tip, i) => (
+                                            <li key={i} className="text-blue-800 text-sm">• {tip}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
+                        </section>
 
-            {/* Related Recipes */}
-            <section className="bg-white py-24 px-6 border-t border-stone-200">
-                <div className="container mx-auto max-w-[1400px]">
-                    <h2 className="text-3xl font-serif font-bold text-coffee-900 mb-12 text-center">You Might Also Like</h2>
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {recipes
-                            .filter(r => r.category === recipe.category && r.slug !== recipe.slug)
-                            .slice(0, 4)
-                            .map(related => (
-                                <RecipeCard key={related.slug} recipe={related} />
-                            ))
-                        }
-                    </div>
+                        <aside className="space-y-6">
+                            <div className="bg-stone-50 p-6 rounded-lg border border-stone-200">
+                                <h3 className="font-serif font-bold text-coffee-900 mb-4 text-lg">Brew Stats</h3>
+                                <div className="space-y-4">
+                                    <div className="flex justify-between items-center border-b border-stone-200 pb-2">
+                                        <span className="text-sm text-stone-500">Time</span>
+                                        <span className="font-medium text-coffee-900">{recipe.time}</span>
+                                    </div>
+                                    <div className="flex justify-between items-center border-b border-stone-200 pb-2">
+                                        <span className="text-sm text-stone-500">Yield</span>
+                                        <span className="font-medium text-coffee-900">{recipe.yield}</span>
+                                    </div>
+                                    <div className="flex justify-between items-center border-b border-stone-200 pb-2">
+                                        <span className="text-sm text-stone-500">Difficulty</span>
+                                        <span className="font-medium text-coffee-900">{recipe.difficulty}</span>
+                                    </div>
+                                    {recipe.ratio && (
+                                        <div className="flex justify-between items-center border-b border-stone-200 pb-2">
+                                            <span className="text-sm text-stone-500">Ratio</span>
+                                            <span className="font-medium text-coffee-900">{recipe.ratio}</span>
+                                        </div>
+                                    )}
+                                    {recipe.temp && (
+                                        <div className="flex justify-between items-center border-b border-stone-200 pb-2">
+                                            <span className="text-sm text-stone-500">Temp</span>
+                                            <span className="font-medium text-coffee-900">{recipe.temp}</span>
+                                        </div>
+                                    )}
+                                    {recipe.equipment && (
+                                        <div className="pt-2">
+                                            <span className="text-sm text-stone-500 block mb-2">Equipment</span>
+                                            <div className="flex flex-wrap gap-1">
+                                                {recipe.equipment.map(e => <span key={e} className="text-xs bg-white border border-stone-200 px-2 py-1 rounded text-stone-600">{e}</span>)}
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+
+                            <Link href="/recipes" className="block w-full py-3 text-center rounded-lg border-2 border-coffee-200 text-coffee-800 font-medium hover:bg-coffee-50 transition">
+                                ← Back to All Recipes
+                            </Link>
+                        </aside>
+                    </article>
                 </div>
-            </section>
-        </>
+            </main>
+        </div>
     );
 }
